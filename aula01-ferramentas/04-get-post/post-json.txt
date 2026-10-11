@@ -1,0 +1,30 @@
+HTTP/1.1 200 OK
+Date: Sun, 11 Oct 2026 21:00:20 GMT
+Content-Type: application/json
+Content-Length: 549
+Connection: keep-alive
+Server: gunicorn/19.9.0
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+
+{
+  "args": {}, 
+  "data": "{  \"nome\": \"Gabriel Uaren\",  \"cidade\": \"Boa Viagem\",  \"curso\": \"ADS\"}", 
+  "files": {}, 
+  "form": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Content-Length": "69", 
+    "Content-Type": "application/json", 
+    "Host": "httpbin.org", 
+    "User-Agent": "curl/8.21.0", 
+    "X-Amzn-Trace-Id": "Root=1-6acbf8e4-0b9ae6f1767d111c5d3cb345"
+  }, 
+  "json": {
+    "cidade": "Boa Viagem", 
+    "curso": "ADS", 
+    "nome": "Gabriel Uaren"
+  }, 
+  "origin": "104.28.193.73", 
+  "url": "https://httpbin.org/post"
+}

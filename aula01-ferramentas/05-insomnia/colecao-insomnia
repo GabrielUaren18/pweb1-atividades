@@ -1,0 +1,149 @@
+type: collection.insomnia.rest/5.0
+schema_version: "5.1"
+name: My first collection
+meta:
+  id: wrk_f19b9d92ba7d449c88aac298cb45a932
+  created: 1791755444761
+  modified: 1791755444761
+  description: ""
+collection:
+  - url: https://viacep.com.br/ws/63870000/json/
+    name: My first request
+    meta:
+      id: req_2d4ff0266a3448eaa08b0282e84ba80a
+      created: 1791755444890
+      modified: 1791755491639
+      isPrivate: false
+      description: ""
+      sortKey: -1791755444891
+    method: GET
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://httpbin.org/get
+    name: New Request
+    meta:
+      id: req_b271c49f5c5f439ea8a4975ef714ddfc
+      created: 1791755800921
+      modified: 1791755904582
+      isPrivate: false
+      description: ""
+      sortKey: -1791755800921
+    method: GET
+    parameters:
+      - name: nome
+        value: Gabriel
+        description: ""
+        disabled: false
+      - name: Curso
+        value: ADS
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://httpbin.org/post
+    name: New Request
+    meta:
+      id: req_7c00ab110fdc4e52b0e5a8a8d45173e8
+      created: 1791755991706
+      modified: 1791756150129
+      isPrivate: false
+      description: ""
+      sortKey: -1791755991706
+    method: POST
+    body:
+      mimeType: application/x-www-form-urlencoded
+      params:
+        - name: nome
+          value: Gabriel
+          description: ""
+          disabled: false
+        - name: curso
+          value: ADS
+          description: ""
+          disabled: false
+    headers:
+      - name: Content-Type
+        value: application/x-www-form-urlencoded
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://httpbin.org/post
+    name: New Request
+    meta:
+      id: req_e2ad3d5273f24903a9436302fbcc1b96
+      created: 1791756228862
+      modified: 1791756525382
+      isPrivate: false
+      description: ""
+      sortKey: -1791756228862
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+          "nome": "Gabriel",
+          "curso": "ADS"
+        }
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: X-Turma
+        value: ADS
+        description: ""
+        disabled: false
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+  - url: https://httpbin.org/get
+    name: New Request
+    meta:
+      id: req_cf59c295064646f5931185b0a92ece9b
+      created: 1791756726100
+      modified: 1791756891748
+      isPrivate: false
+      description: ""
+      sortKey: -1791756726100
+    method: POST
+    settings:
+      renderRequestBody: true
+      encodeUrl: true
+      followRedirects: global
+      cookies:
+        send: true
+        store: true
+      rebuildPath: true
+cookieJar:
+  name: Default Jar
+  meta:
+    id: jar_6b2f4c0d8f61fa66b873b394398537ac3d14ff55
+    created: 1791755444767
+    modified: 1791755444767
+environments:
+  name: Base Environment
+  meta:
+    id: env_6b2f4c0d8f61fa66b873b394398537ac3d14ff55
+    created: 1791755444764
+    modified: 1791755444764
+    isPrivate: false

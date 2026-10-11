@@ -1,0 +1,23 @@
+HTTP/1.1 200 OK
+Date: Sun, 11 Oct 2026 20:59:06 GMT
+Content-Type: application/json
+Content-Length: 324
+Connection: keep-alive
+Server: gunicorn/19.9.0
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+
+{
+  "args": {
+    "curso": "ADS", 
+    "nome": "Gabriel"
+  }, 
+  "headers": {
+    "Accept": "*/*", 
+    "Host": "httpbin.org", 
+    "User-Agent": "curl/8.21.0", 
+    "X-Amzn-Trace-Id": "Root=1-6acbf89a-685137353a74491a59d054ea"
+  }, 
+  "origin": "104.28.193.73", 
+  "url": "https://httpbin.org/get?nome=Gabriel&curso=ADS"
+}

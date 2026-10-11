@@ -1,0 +1,14 @@
+HTTP/1.1 204 No Content
+Server: nginx/1.22.0
+Date: Sun, 11 Oct 2026 20:54:30 GMT
+Connection: keep-alive
+Expires: Sun, 11 Oct 2026 21:54:30 GMT
+Cache-Control: max-age=3600
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Methods: OPTIONS, HEAD, GET
+Access-Control-Allow-Headers: Access-Control-Allow-Origin, X-Requested-With, X-HTTP-Method-Override, Content-Type, Authorization, Accept
+Access-Control-Allow-Credentials: true
+Access-Control-Max-Age: 1728000
+Content-Type: text/plain; charset=utf-8
+Content-Length: 0
+

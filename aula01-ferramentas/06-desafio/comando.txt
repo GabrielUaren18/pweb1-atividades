@@ -1,0 +1,1 @@
+curl.exe -X POST "URL-DO-WEBHOOK" -H "Content-Type: application/json" -H "X-Turma: ADS" -d "@corpo.json"
