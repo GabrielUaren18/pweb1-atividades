@@ -17,14 +17,14 @@ Este é o meu repositório de atividades da disciplina. Cada aula tem a sua pró
 
 | Aula | Pasta | Tema | Situação |
 |---|---|---|---|
-| 01 | [`aula01-ferramentas`](aula01-ferramentas/) | Ferramentas para inspecionar a Web | ⬜ |
-| 02 | [`aula02-php-http`](aula02-php-http/) | PHP e HTTP na prática | ⬜ |
+| 01 | [`aula01-ferramentas`](aula01-ferramentas/) | Ferramentas para inspecionar a Web | ✅ |
+| 02 | [`aula02-php-http`](aula02-php-http/) | PHP e HTTP na prática | ✅ |
 
 ## Projeto integrador: Perfil do Estudante
 
 | Versão | Pasta | O que entra | Situação |
 |---|---|---|---|
-| v1 | [`projeto/v1`](projeto/v1/) | Páginas por URL, tema com cookie, 404 e API JSON | ⬜ |
+| v1 | [`projeto/v1`](projeto/v1/) | Páginas por URL, tema com cookie, 404 e API JSON | ✅ |
 
 Troque ⬜ por ✅ quando concluir uma aula.
 
