@@ -1,0 +1,95 @@
+/* Projeto integrador v1: Perfil do Estudante
+   Crie aqui o estilo do seu perfil, com os dois temas (R9). */
+
+   .tema-claro {
+    --fundo: #f4f7fb;
+    --texto: #253247;
+    --cartao: #ffffff;
+    --destaque: #2563eb;
+}
+
+.tema-escuro {
+    --fundo: #151b29;
+    --texto: #edf2fa;
+    --cartao: #232d40;
+    --destaque: #8bb5ff;
+}
+
+body {
+    background-color: var(--fundo);
+    color: var(--texto);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    line-height: 1.6;
+}
+
+header {
+    background-color: var(--cartao);
+    padding: 25px;
+    text-align: center;
+}
+
+nav {
+    margin-top: 15px;
+}
+
+nav a {
+    color: var(--destaque);
+    margin: 10px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: var(--cartao);
+    padding: 20px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+a {
+    color: var(--destaque);
+}
+
+main {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: var(--cartao);
+    border-radius: 12px;
+    min-height: 300px;
+}
+
+main h2 {
+    color: var(--destaque);
+}
+
+main p {
+    margin-bottom: 15px;
+}
+
+main a {
+    font-weight: bold;
+    text-decoration: none;
+}
+
+main a:hover {
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    main {
+        margin: 20px 15px;
+        padding: 20px;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 5px;
+    }
+}
