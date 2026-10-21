@@ -12,11 +12,56 @@
 
 **1.1 Cole o código dos três métodos que você escreveu e explique cada um.**
 
-_(responda aqui)_
+**Método `calcularMedia()`:**
+
+```php
+public function calcularMedia(): float
+{
+    return ($this->nota1 + $this->nota2) / 2;
+}
+```
+
+Esse método soma as duas notas do aluno, divide por 2 e devolve a média.
+
+**Método `situacao()`:**
+
+```php
+public function situacao(): string
+{
+    $media = $this->calcularMedia();
+
+    if ($media >= 7) {
+        return "Aprovado";
+    } elseif ($media >= 4) {
+        return "Recuperação";
+    } else {
+        return "Reprovado";
+    }
+}
+```
+
+Esse método verifica a média do aluno. Se for 7 ou mais, ele está aprovado. Se for de 4 até menos de 7, fica de recuperação. Abaixo de 4, está reprovado.
+
+**Método `apresentar()`:**
+
+```php
+public function apresentar(): void
+{
+    $media = number_format($this->calcularMedia(), 1, ',', '.');
+
+    echo "{$this->nome}: média $media ({$this->situacao()})\n";
+}
+```
+
+Esse método mostra o nome, a média e a situação do aluno no terminal. O `number_format()` deixa a média com uma casa decimal.
 
 **1.2 Classifique os três métodos: de ação, com retorno, com parâmetros, modificador ou de consulta? Justifique.**
 
-_(responda aqui)_
+O `calcularMedia()` e o `situacao()` são métodos de consulta com retorno, porque pegam informações do aluno e devolvem um resultado sem modificar os dados.
+
+Já o `apresentar()` é um método de ação, porque mostra as informações no terminal usando `echo`.
+
+Nenhum deles recebe parâmetros ou modifica os dados do aluno.
 
 ## 2. Saídas do terminal
 
@@ -25,33 +70,38 @@ _(responda aqui)_
 **2.1 Saída de**: `php q03-metodos-this/aluno.php`
 
 ```text
-(cole aqui a saída do terminal)
+Ana: média 8,8 (Aprovado)
+Bruno: média 5,5 (Recuperação)
+Caio: média 2,8 (Reprovado)
 ```
 
 **Explicação:**
 
-_(responda aqui)_
+O programa calculou as médias dos três alunos e mostrou a situação de cada um. A Ana passou, o Bruno ficou de recuperação e o Caio foi reprovado.
 
 **2.2 Saída com o quarto aluno (notas 6,5 e 7,5)**
 
 ```text
-(cole aqui a saída do terminal)
+Ana: média 8,8 (Aprovado)
+Bruno: média 5,5 (Recuperação)
+Caio: média 2,8 (Reprovado)
+Gabriel: média 7,0 (Aprovado)
 ```
 
 **Explicação:**
 
-_(responda aqui)_
+Adicionei meu nome como quarto aluno e coloquei as notas 6,5 e 7,5. A média ficou 7,0 e o programa mostrou que fui aprovado.
 
 ## 3. Perguntas
 
 **a) Por que `situacao()` chama `$this->calcularMedia()` em vez de repetir a conta?**
 
-_(responda aqui)_
+Porque a conta da média já está pronta no outro método. Assim, não preciso repetir o mesmo código e fica mais fácil de corrigir ou mudar depois.
 
 **b) Com média exatamente 7,0, qual é a situação? Qual linha do código decide isso?**
 
-_(responda aqui)_
+É aprovado, porque a condição `if ($media >= 7)` aceita médias maiores ou iguais a 7.
 
 **c) O método `apresentar()` foi escrito uma vez. Como ele sabe se deve mostrar a Ana ou o Bruno?**
 
-_(responda aqui)_
+Por causa do `$this`, que pega os dados do próprio aluno. Quando chamo `$ana->apresentar()`, ele mostra a Ana. Quando chamo `$bruno->apresentar()`, mostra o Bruno.
