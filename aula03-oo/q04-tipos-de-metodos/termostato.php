@@ -24,6 +24,16 @@ class Termostato
         $this->temperatura -= $graus;
     }
 
+    public function aquecer(float $graus): void
+{
+    $this->temperatura += $graus;
+}
+
+public function diferencaParaAlvo(): float
+{
+    return $this->temperatura - $this->alvo;
+}
+
     public function precisaResfriar(): bool
     {
         return $this->temperatura > $this->alvo;
@@ -44,5 +54,11 @@ $sala->resfriar(2);
 $sala->mostrarStatus();
 $sala->definirAlvo(24);
 $sala->mostrarStatus();
+
 echo $sala->getTemperatura() + 10, "\n";
+
 var_dump($sala->precisaResfriar());
+
+$sala->aquecer(5);
+$sala->mostrarStatus();
+echo $sala->diferencaParaAlvo(), "\n";
