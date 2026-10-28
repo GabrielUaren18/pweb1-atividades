@@ -1,4 +1,56 @@
 <?php
+
+
+// Classe Projeto: guarda as informações de cada projeto.
+class Projeto
+{
+    // Private impede que esses dados sejam alterados diretamente de fora.
+    private string $titulo;
+    private string $descricao;
+    private string $tecnologias;
+
+    // O construtor recebe os dados quando criamos um projeto.
+    public function __construct(string $titulo, string $descricao, string $tecnologias)
+    {
+        // Verifica se o título está vazio ou só com espaços.
+        if (trim($titulo) === '') {
+            throw new Exception("O projeto precisa de um título.");
+        }
+
+        // Guarda as informações dentro do objeto.
+        $this->titulo = $titulo;
+        $this->descricao = $descricao;
+        $this->tecnologias = $tecnologias;
+    }
+
+    // Os getters permitem consultar os dados privados.
+    public function getTitulo(): string
+    {
+        return $this->titulo;
+    }
+
+    public function getDescricao(): string
+    {
+        return $this->descricao;
+    }
+
+    public function getTecnologias(): string
+    {
+        return $this->tecnologias;
+    }
+
+    // Transforma os dados do objeto em um array.
+    public function paraArray(): array
+    {
+        return [
+            "titulo" => $this->titulo,
+            "descricao" => $this->descricao,
+            "tecnologias" => $this->tecnologias
+        ];
+    }
+}
+
+
 // =====================================================================
 // Projeto integrador v1: Perfil do Estudante
 // Siga os requisitos do enunciado. Mantenha esta ordem:
