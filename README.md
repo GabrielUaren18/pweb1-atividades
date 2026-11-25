@@ -19,12 +19,15 @@ Este é o meu repositório de atividades da disciplina. Cada aula tem a sua pró
 |---|---|---|---|
 | 01 | [`aula01-ferramentas`](aula01-ferramentas/) | Ferramentas para inspecionar a Web | ✅ |
 | 02 | [`aula02-php-http`](aula02-php-http/) | PHP e HTTP na prática | ✅ |
+| 03 | [`aula03-oo`](aula03-oo/) | Orientação a Objetos em PHP | ✅ |
+| 06 | [`aula06-pratica`](aula06-pratica/) | Laravel na prática (rotas, views e controllers) | ✅ |
 
 ## Projeto integrador: Perfil do Estudante
 
 | Versão | Pasta | O que entra | Situação |
 |---|---|---|---|
 | v1 | [`projeto/v1`](projeto/v1/) | Páginas por URL, tema com cookie, 404 e API JSON | ✅ |
+| v2 | [`projeto/v2`](projeto/v2/) | Classes Perfil e Projeto e evolução do projeto | ✅ |
 
 Troque ⬜ por ✅ quando concluir uma aula.
 
