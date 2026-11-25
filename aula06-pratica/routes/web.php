@@ -53,7 +53,7 @@ Route::get('/feira-do-dia', fn () => 'Página da feira')->name('feira-dia');
 Route::get('/produtos-antigos', fn () => redirect('/produtos', 301));
 Route::get('/produtos', [ProdutoController::class, 'index'])->name('produtos.index');
 
-Route::get('/cardapio-do-dia', [CardapioController::class, 'index'])->name('cardapio');
+Route::get('/cardapio', [CardapioController::class, 'index'])->name('cardapio');
 
 Route::get('/quem-somos', fn () => view('welcome', ['paginaSobre' => 'Feira Digital']))->name('sobre');
 Route::get('/contato', fn () => 'Contato da Feira Digital')->name('contato');
