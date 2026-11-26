@@ -16,6 +16,16 @@ Content-Type: text/html; charset=utf-8
 
 Meu nome é Gabriel Uaren e estudo ADS no IFCE
 
+GET /meu-nome/
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
+Meu nome é Gabriel Uaren e estudo ADS no IFCE
+
+GET /Meu-Nome
+HTTP/1.1 404 Not Found
+Content-Type: text/html; charset=utf-8
+
 GET /cartao
 HTTP/1.1 200 OK
 Content-Type: text/html; charset=utf-8
@@ -28,7 +38,7 @@ GET `/cartao` -> rota em `routes/web.php` -> closure -> resposta HTML 200.
 
 ### Respostas
 a) As duas respostas são `text/html; charset=utf-8`. A primeira é texto simples, mas continua sendo enviada como HTML; a segunda contém tags HTML.
-b) `/meu-nome/` também é atendida porque o Laravel normaliza a barra final. `/Meu-Nome` não corresponde: o caminho da rota diferencia maiúsculas de minúsculas.
+b) `/meu-nome/` também é atendida (200 OK), pois o Laravel normaliza a barra final. `/Meu-Nome` retorna 404 porque o caminho da rota diferencia maiúsculas de minúsculas.
 c) A requisição passa diretamente da rota para a closure e retorna HTML. Ainda não há controller nem view nesse fluxo.
 
 ## A02: Meu perfil em JSON
@@ -90,7 +100,7 @@ GET `/tabuada/7` -> rota com restrição `whereNumber` -> closure calcula os dez
 ### Respostas
 a) `/tabuada/sete` retorna 404 porque o parâmetro não atende a restrição `whereNumber`; a closure não é chamada.
 b) A restrição impede valores que não sejam numéricos de chegarem à rota. Sem ela, texto como `sete` seria aceito como parâmetro, embora não represente um número válido para a tabuada.
-c) `{turma?}` indica que o segmento é opcional. O padrão `ADS` na closure garante uma saudação válida quando a URL não informa uma turma.
+c) `{turma?}` indica que o segmento é opcional. O padrão `ADS` na closure garante uma saudação válida quando a URL não informa uma turma. Se removermos o padrão da closure e acessarmos `/boas-vindas-turma` sem segmento, Laravel chama a closure sem o argumento obrigatório `$turma`, e o PHP lança `ArgumentCountError` por argumento obrigatório ausente.
 
 ## A04: Status e redirecionamentos
 
@@ -116,11 +126,13 @@ Location: http://127.0.0.1:8000/produtos
 ### Caminho da requisição
 GET `/loja` -> rota em `routes/web.php` -> closure cria redirecionamento -> resposta 302 com `Location`.
 
+Em `routes/web.php`, o destino configurado é `/feira-do-dia`. A rota `/feira` existe separadamente, mas não é o destino atual de `/loja`; a saída acima corresponde ao `curl.exe -i` executado contra o código.
+
 ### Respostas
 a) `/admin` retorna 403 e `/em-breve` retorna 503. Os códigos aparecem na primeira linha da resposta HTTP.
 b) `curl.exe -i` mostra o status e os cabeçalhos; no navegador, eles também aparecem em DevTools > Network, selecionando a requisição.
 c) O navegador recebe o 302 de `/loja`, faz uma segunda requisição para `/feira-do-dia` e recebe a página de destino. `curl.exe -i` não segue o redirecionamento sem a opção `-L`.
-d) 301 indica redirecionamento permanente, como `/produtos-antigos` para `/produtos`. 302 indica redirecionamento temporário, como `/loja` para `/feira-do-dia`.
+d) 301 indica redirecionamento permanente, como `/produtos-antigos` para `/produtos`. 302 indica redirecionamento temporário. Neste código, `/loja` redireciona para `/feira-do-dia`; embora o enunciado mencione `/feira`, esse não é o destino configurado atualmente.
 
 ## A05: O cardápio da feira
 
@@ -141,7 +153,7 @@ No código-fonte HTML (Ctrl+U), o nome aparece escapado como `&lt;b&gt;Panelada&
 GET `/cardapio` -> rota -> `CardapioController@index` -> view `cardapio` -> layout `layouts/app.blade.php` e partial `partials/menu.blade.php` -> HTML 200.
 
 ### Respostas
-a) O controller prepara os pratos e passa a lista à view; o layout inclui o menu e a view monta o cardápio.
+a) Caminho completo: `GET /cardapio -> routes/web.php -> CardapioController@index -> view cardapio -> layout layouts/app.blade.php e partial partials/menu.blade.php -> resposta HTML 200`. A rota mapeia o endereço ao controller; o controller prepara e envia os pratos; a view monta o conteúdo; o layout fornece a estrutura compartilhada e inclui o partial de navegação; Laravel retorna o HTML ao navegador.
 b) As chaves `{{ }}` escapam o HTML. Por isso `<b>` aparece como texto e não formata a palavra. O escape evita que tags fornecidas como dados sejam interpretadas pelo navegador.
 c) O layout fornece a estrutura compartilhada, o partial insere a navegação e a view `cardapio.blade.php` fornece o conteúdo específico da página.
 
@@ -189,7 +201,7 @@ GET `/cardapio` -> rota -> `CardapioController@index` -> view `cardapio` -> HTML
 ### Respostas
 a) O array de pratos fica no controller; `index()` passa seus dados para a view.
 b) No fluxo MVC, a rota direciona a requisição ao controller, e o controller prepara os dados para a view.
-c) O `use` importa a classe do namespace `App\Http\Controllers`. Sem ele, a referência `CardapioController::class` aponta para a classe errada e a resolução da rota falha.
+c) O `use App\Http\Controllers\CardapioController;` importa a classe do namespace `App\Http\Controllers`. Sem esse `use`, `routes/web.php` não está nesse namespace e o PHP resolve o nome curto `CardapioController` no namespace global (raiz); a classe não é encontrada ali, e Laravel falha ao resolver a rota quando ela é chamada.
 d) O controller mantém a lógica fora do arquivo de rotas e facilita manutenção, leitura e teste.
 
 ## A08: Estoque e categorias
@@ -263,8 +275,10 @@ HTTP/1.1 302 Found
 Location: /inscricao
 Inscrição recebida: Maria Silva vai trazer 5 de Mel.
 
-POST sem token CSRF
-HTTP/1.1 419 Page Expired
+Comando `curl.exe -i -X POST http://127.0.0.1:8000/inscricao`, sem carregar o formulário:
+HTTP/1.1 419 unknown status
+Content-Type: text/html; charset=utf-8
+<title>Page Expired</title>
 ```
 
 ### Caminho da requisição
@@ -274,4 +288,4 @@ GET `/inscricao` -> `InscricaoController@create` -> view do formulário. POST `/
 a) O Laravel redireciona de volta após erro de validação, guarda os valores enviados na sessão e `old('campo')` os recoloca nos inputs.
 b) `@csrf` adiciona o token oculto ao formulário. Uma requisição POST sem token válido é rejeitada com 419.
 c) Depois de um envio válido, `store()` redireciona e a página GET mostra a mensagem de sucesso armazenada na sessão.
-d) O padrão POST/Redirect/GET evita que atualizar a página reenvie diretamente o formulário e repita o processamento do POST.
+d) O padrão POST/Redirect/GET evita que atualizar a página reenvie diretamente o formulário e repita o processamento do POST. O comando `curl.exe` acima faz um POST direto: não carrega primeiro o HTML do formulário, não recebe um cookie de sessão válido e não envia o campo `_token`. A diretiva `@csrf` gera o campo no HTML para o navegador enviar quando o formulário é submetido; ela não acrescenta token automaticamente a um POST independente do curl. Por isso Laravel rejeita essa requisição com status 419 e a página tem título “Page Expired”.
