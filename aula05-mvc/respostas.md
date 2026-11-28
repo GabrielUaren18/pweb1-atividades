@@ -96,7 +96,37 @@ Too few arguments to function ...routes/web.php:21..., 0 passed ... and exactly 
 
 ## Atividade 03
 
-Pendente.
+Nomeei a rota de apresentação como `sobre`, usei `route('sobre')` no link da página de contato, adicionei o redirecionamento `/inicio` e uma rota fallback com resposta 404. Também alterei a URI de apresentação para `/quem-somos`; o nome `sobre` foi mantido, então o link gerado continua apontando para a nova URI.
+
+### Capturas reais em `http://127.0.0.1:8005`
+
+```text
+GET /inicio
+HTTP/1.1 302 Found
+Location: http://127.0.0.1:8005
+Content-Type: text/html; charset=utf-8
+
+GET /qualquer-coisa
+HTTP/1.1 404 Not Found
+Content-Type: text/html; charset=utf-8
+<title>Página não encontrada | Estacionamento Campus</title>
+<h1>404 - Página não encontrada</h1>
+
+GET /quem-somos
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+
+GET /sobre
+HTTP/1.1 404 Not Found
+Content-Type: text/html; charset=utf-8
+
+GET /contato (link renderizado)
+<a href="http://127.0.0.1:8005/quem-somos">Sobre o estacionamento</a>
+```
+
+O redirecionamento retorna 302 e informa o destino no cabeçalho `Location`. A função `route('sobre')` resolve o endereço pelo nome registrado, não por uma string fixa; por isso, o link segue funcionando após a alteração da URI. A URL antiga `/sobre` deixa de corresponder à rota e recebe o fallback 404.
+
+![Link de contato gerado pelo nome da rota](capturas/atividade-03-contato-link-nomeado.png)
 
 ## Atividade 04
 
