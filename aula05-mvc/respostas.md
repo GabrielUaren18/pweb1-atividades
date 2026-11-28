@@ -251,7 +251,46 @@ Corrigi o nome do método depois do teste. O controller usa o namespace `App\Htt
 
 ## Atividade 08
 
-Pendente.
+Reaproveitei a hierarquia de veículos do projeto anterior e adicionei `Van` como quarto tipo concreto. `VeiculoController` monta quatro objetos de classes diferentes e os envia às views `produtos.index` e `produtos.show`. As rotas preservam os nomes `produtos.index` e `produtos.show`.
+
+### `php artisan route:list --name=produtos`
+
+```text
+GET|HEAD produtos .. produtos.index › VeiculoController@index
+GET|HEAD produtos/{id} .. produtos.show › VeiculoController@show
+
+Showing [2] routes
+```
+
+### Capturas reais em `http://127.0.0.1:8005`
+
+```text
+GET /produtos
+HTTP/1.1 200 OK
+ABC1D23 — carro — Sedan — R$ 30,00
+XYZ2E34 — moto — CG 160 — R$ 15,00
+BRA3F45 — caminhonete — Hilux — R$ 40,00
+QRS4G56 — van — Sprinter — R$ 50,00
+
+GET /produtos/1
+HTTP/1.1 200 OK
+XYZ2E34
+Tipo: moto
+Modelo: CG 160
+1 hora(s): R$ 3,00
+2 hora(s): R$ 6,00
+5 hora(s): R$ 15,00
+
+GET /produtos/99
+HTTP/1.1 404 Not Found
+<title>Not Found</title>
+```
+
+O mesmo método `calcularTarifa()` produz valores diferentes conforme a classe concreta — isso é polimorfismo. `show(int $id)` chama `abort_unless` quando o índice não existe, e o Laravel responde 404. Os fluxos são `GET /produtos → VeiculoController@index → objetos do domínio → produtos.index` e `GET /produtos/1 → VeiculoController@show → produtos.show`.
+
+![Lista de veículos e tarifas polimórficas](capturas/atividade-08-veiculos.png)
+
+![Detalhe do veículo selecionado](capturas/atividade-08-detalhe.png)
 
 ## Atividade 09
 

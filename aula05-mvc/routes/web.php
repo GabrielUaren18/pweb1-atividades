@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\PaginaController;
+use App\Http\Controllers\VeiculoController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PaginaController::class, 'inicio'])->name('inicio');
@@ -13,19 +14,10 @@ Route::get('/inicio', function () {
     return redirect('/');
 });
 
-Route::get('/produtos', function () {
-    return view('produtos.index', [
-        'produtos' => [
-            ['nome' => 'Vaga coberta para carro', 'preco' => 42.00],
-            ['nome' => 'Vaga para motocicleta', 'preco' => 18.00],
-            ['nome' => 'Vaga com carregamento elétrico', 'preco' => 36.50],
-        ],
-    ]);
-})->name('produtos.index');
-
-Route::get('/produtos/{id}', function (int $id) {
-    return "Produto {$id} solicitado no Estacionamento Campus.";
-})->whereNumber('id');
+Route::get('/produtos', [VeiculoController::class, 'index'])->name('produtos.index');
+Route::get('/produtos/{id}', [VeiculoController::class, 'show'])
+    ->whereNumber('id')
+    ->name('produtos.show');
 
 Route::get('/saudacao/{nome?}', function (string $nome = 'visitante') {
     return "Olá, {$nome}!";
