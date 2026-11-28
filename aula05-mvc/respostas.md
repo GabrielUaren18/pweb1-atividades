@@ -130,7 +130,34 @@ O redirecionamento retorna 302 e informa o destino no cabeçalho `Location`. A f
 
 ## Atividade 04
 
-Pendente.
+Criei `POST /mensagem` como uma rota exclusiva para receber uma mensagem. Um `GET` no mesmo URI não executa essa ação.
+
+### Capturas reais em `http://127.0.0.1:8005`
+
+```text
+GET /mensagem
+HTTP/1.1 404 Not Found
+Content-Type: text/html; charset=utf-8
+<title>Página não encontrada | Estacionamento Campus</title>
+<h1>404 - Página não encontrada</h1>
+
+curl.exe -i -X POST http://127.0.0.1:8005/mensagem
+HTTP/1.1 419 unknown status
+Content-Type: text/html; charset=utf-8
+<title>Page Expired</title>
+```
+
+| Requisição | Status observado |
+|---|---:|
+| `GET /sobre` | 404 |
+| `GET /inicio` | 302 |
+| `GET /produtos/abc` | 404 |
+| `GET /mensagem` | 404 |
+| `POST /mensagem` sem token | 419 |
+
+O `GET /mensagem` exibiu o fallback personalizado (404), pois a rota fallback também corresponde a métodos sem rota específica; não apareceu 405 neste projeto. O middleware CSRF compara o token enviado no formulário com o token associado à sessão do navegador. O cookie identifica a sessão; `@csrf` colocará o token oculto no formulário, que será enviado no POST junto com o cookie. O POST sem token foi rejeitado com 419. Valores dos cookies foram omitidos do registro.
+
+![GET em uma rota disponível apenas para POST](capturas/atividade-04-get-mensagem.png)
 
 ## Atividade 05
 

@@ -26,6 +26,10 @@ Route::get('/saudacao/{nome?}', function (string $nome = 'visitante') {
     return "Olá, {$nome}!";
 });
 
+Route::post('/mensagem', function () {
+    return 'Mensagem do Estacionamento Campus recebida.';
+})->name('mensagem.store');
+
 Route::fallback(function () {
     return response()->view('nao-encontrada', [], 404);
 });
