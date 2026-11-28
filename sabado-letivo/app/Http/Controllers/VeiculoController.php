@@ -13,6 +13,7 @@ class VeiculoController extends Controller
 {
     private function criar(array $dados): Veiculo
     {
+        // Monta o objeto concreto correspondente ao tipo escolhido no formulário.
         return match ($dados['tipo']) {
             'carro' => new Carro($dados['placa'], $dados['modelo']),
             'moto' => new Moto($dados['placa'], $dados['modelo']),
@@ -23,6 +24,7 @@ class VeiculoController extends Controller
 
     private function itens(): array
     {
+        // Mantém os veículos fixos e remonta os cadastrados a partir da sessão.
         $fixos = [
             new Carro('ABC1D23', 'Sedan'),
             new Moto('XYZ2E34', 'CG 160'),
@@ -54,6 +56,7 @@ class VeiculoController extends Controller
 
     public function json()
     {
+        // paraArray() expõe apenas os dados necessários, evitando atributos private no JSON.
         $dados = array_map(
             fn (Veiculo $veiculo) => $veiculo->paraArray(),
             $this->itens()
@@ -77,6 +80,7 @@ class VeiculoController extends Controller
         try {
             $veiculo = $this->criar($dados);
         } catch (InvalidArgumentException $e) {
+            // Validação da regra de negócio: devolve o erro para o campo do formulário.
             return back()
                 ->withErrors(['placa' => $e->getMessage()])
                 ->withInput();

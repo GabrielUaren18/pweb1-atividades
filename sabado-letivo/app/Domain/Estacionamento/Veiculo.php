@@ -13,6 +13,7 @@ abstract class Veiculo
 
     public function __construct(string $placa, string $modelo)
     {
+        // Regra de negócio da classe mãe: placa e modelo são obrigatórios.
         if (trim($placa) === '' || trim($modelo) === '') {
             throw new InvalidArgumentException('Placa e modelo são obrigatórios.');
         }
@@ -32,6 +33,8 @@ abstract class Veiculo
     }
 
     abstract public function tipo(): string;
+
+    // Cada classe filha implementa sua própria tarifa.
     abstract public function calcularTarifa(float $horas): float;
 
     public function paraArray(): array

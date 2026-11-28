@@ -45,6 +45,7 @@ Route::get('/veiculos/{indice}', [VeiculoController::class, 'show'])
     ->whereNumber('indice')
     ->name('veiculos.show');
 
+// Esta é a última rota: captura qualquer endereço que não tenha sido definido acima.
 Route::fallback(function () {
     return response()->view('nao-encontrada', [], 404);
 });

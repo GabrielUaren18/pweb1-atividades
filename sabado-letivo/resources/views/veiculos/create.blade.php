@@ -5,6 +5,7 @@
 @section('conteudo')
     <h1>Cadastrar veículo</h1>
     <form method="POST" action="{{ route('veiculos.store') }}">
+        {{-- Protege o formulário contra requisições CSRF falsas. --}}
         @csrf
         <p>
             Tipo:
