@@ -13,3 +13,11 @@ Route::get('/sobre', function () {
 Route::get('/contato', function () {
     return view('contato');
 });
+
+Route::get('/produtos/{id}', function (int $id) {
+    return "Produto {$id} solicitado no Estacionamento Campus.";
+})->whereNumber('id');
+
+Route::get('/saudacao/{nome?}', function (string $nome = 'visitante') {
+    return "Olá, {$nome}!";
+});

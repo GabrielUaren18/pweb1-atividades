@@ -59,7 +59,40 @@ Capturas do navegador:
 
 ## Atividade 02
 
-Pendente.
+Configurei `GET /produtos/{id}` com `whereNumber('id')` e `GET /saudacao/{nome?}` com o valor padrão `visitante`.
+
+### Capturas reais em `http://127.0.0.1:8005`
+
+```text
+GET /produtos/7
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Produto 7 solicitado no Estacionamento Campus.
+
+GET /produtos/abc
+HTTP/1.1 404 Not Found
+Content-Type: text/html; charset=utf-8
+<title>Not Found</title>
+
+GET /saudacao
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Olá, visitante!
+
+GET /saudacao/Ana
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Olá, Ana!
+
+Teste temporário sem o valor padrão, GET /saudacao
+HTTP/1.1 500 Internal Server Error
+ArgumentCountError
+Too few arguments to function ...routes/web.php:21..., 0 passed ... and exactly 1 expected
+```
+
+`abc` recebe 404 porque não satisfaz a restrição numérica da rota. O `?` indica que o segmento `nome` é opcional. O valor padrão no parâmetro PHP permite chamar a closure sem argumento; removê-lo tornou o argumento obrigatório e gerou o `ArgumentCountError` registrado acima. Recoloquei o valor padrão após o teste. Valores de cookies, IDs de sessão e partes do caminho absoluto da mensagem foram omitidos.
+
+![Rota numérica de produto](capturas/atividade-02-produto.png)
 
 ## Atividade 03
 
