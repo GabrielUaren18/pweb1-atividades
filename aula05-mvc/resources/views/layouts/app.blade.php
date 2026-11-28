@@ -10,6 +10,10 @@
     @include('partials.menu')
 
     <main class="container">
+        @if (session('sucesso'))
+            <p class="alert-success" role="status">{{ session('sucesso') }}</p>
+        @endif
+
         @yield('conteudo')
     </main>
 

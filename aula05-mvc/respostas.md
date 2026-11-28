@@ -294,7 +294,56 @@ O mesmo método `calcularTarifa()` produz valores diferentes conforme a classe c
 
 ## Atividade 09
 
-Pendente.
+Adicionei GET `/produtos/create` (`produtos.create`) e POST `/produtos` (`produtos.store`). O formulário usa `@csrf`, `old()` e `@error`; o controller valida os dados, instancia a subclasse de veículo escolhida e guarda seu array na sessão `cadastrados`. A lista combina os exemplos fixos com os veículos cadastrados, e uma mensagem flash confirma o POST. Como a tarifa é calculada pela classe concreta, adaptei o campo numérico de preço do exemplo para tempo previsto em horas.
+
+### `php artisan route:list --name=produtos`
+
+```text
+GET|HEAD produtos .. produtos.index › VeiculoController@index
+POST produtos .. produtos.store › VeiculoController@store
+GET|HEAD produtos/create .. produtos.create › VeiculoController@create
+GET|HEAD produtos/{id} .. produtos.show › VeiculoController@show
+
+Showing [4] routes
+```
+
+### Testes HTTP reais em `http://127.0.0.1:8005`
+
+```text
+POST /produtos (campos vazios, token CSRF válido)
+HTTP 302 Found
+Location: /produtos/create
+Após seguir o redirect, o formulário mostra:
+O campo tipo é obrigatório.
+O campo placa é obrigatório.
+O campo modelo é obrigatório.
+O campo tempo previsto é obrigatório.
+
+POST /produtos (horas=texto, token CSRF válido)
+HTTP 302 Found
+Location: /produtos/create
+Após seguir o redirect, o formulário mostra:
+O campo tempo previsto deve ser numérico.
+
+POST /produtos (veículo van, placa JKL5M67, modelo Sprinter, horas=2.5)
+HTTP 302 Found
+Location: /produtos
+GET /produtos na mesma sessão:
+Veículo JKL5M67 cadastrado com sucesso.
+JKL5M67 — van — Sprinter
+
+POST /produtos sem @csrf temporário e sem token
+HTTP 419
+<title>Page Expired</title>
+```
+
+Também removi temporariamente `@csrf` do formulário e confirmei que o HTML não continha o campo `_token`; o POST foi recusado com 419. Restaurei a diretiva no código final. A sessão foi preservada entre o POST e o GET seguinte; diferentemente de um banco de dados, essa implementação de demonstração mantém os cadastros associados à sessão do visitante.
+
+`old()` repõe os dados submetidos depois do redirect de validação, e `@error` mostra as mensagens junto aos campos. O POST seguido de redirect e GET aplica o padrão Post/Redirect/Get. O token oculto emitido por `@csrf` é validado em relação à sessão; sem ele, o Laravel rejeita a requisição.
+
+![Formulário de cadastro de veículo](capturas/atividade-09-formulario.png)
+
+![Lista após cadastro com mensagem de sucesso](capturas/atividade-09-cadastro.png)
 
 ## Atividade 10
 

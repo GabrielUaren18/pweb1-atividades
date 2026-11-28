@@ -58,6 +58,35 @@ a {
     font-weight: 700;
 }
 
+.alert-success {
+    padding: 0.75rem 1rem;
+    border-left: 4px solid #17613e;
+    background: #e0efe5;
+}
+
+.form-grid {
+    display: grid;
+    max-width: 32rem;
+    gap: 1rem;
+}
+
+.field {
+    display: grid;
+    gap: 0.35rem;
+}
+
+input,
+select,
+button {
+    padding: 0.65rem;
+    font: inherit;
+}
+
+.erro {
+    margin: 0;
+    color: #a23d00;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
