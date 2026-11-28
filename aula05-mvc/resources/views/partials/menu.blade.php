@@ -4,4 +4,5 @@
     <a href="{{ route('contato') }}">Contato</a>
     <a href="{{ route('produtos.index') }}">Vagas</a>
     <a href="{{ route('produtos.create') }}">Cadastrar veículo</a>
+    <a href="{{ route('estacionamentos.index') }}">Estacionamentos</a>
 </nav>

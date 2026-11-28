@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Estacionamento\Caminhonete;
-use App\Domain\Estacionamento\Carro;
-use App\Domain\Estacionamento\Moto;
-use App\Domain\Estacionamento\Van;
 use App\Domain\Estacionamento\Veiculo;
+use App\Domain\Estacionamento\VeiculoFactory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -18,32 +15,7 @@ class VeiculoController extends Controller
      */
     private function veiculos(): array
     {
-        $exemplos = [
-            new Carro('ABC1D23', 'Sedan'),
-            new Moto('XYZ2E34', 'CG 160'),
-            new Caminhonete('BRA3F45', 'Hilux'),
-            new Van('QRS4G56', 'Sprinter'),
-        ];
-
-        $cadastrados = array_map(
-            fn (array $dados): Veiculo => $this->instanciar($dados),
-            session('cadastrados', []),
-        );
-
-        return [...$exemplos, ...$cadastrados];
-    }
-
-    /**
-     * @param  array{placa: string, modelo: string, tipo: string}  $dados
-     */
-    private function instanciar(array $dados): Veiculo
-    {
-        return match ($dados['tipo']) {
-            'carro' => new Carro($dados['placa'], $dados['modelo']),
-            'moto' => new Moto($dados['placa'], $dados['modelo']),
-            'caminhonete' => new Caminhonete($dados['placa'], $dados['modelo']),
-            'van' => new Van($dados['placa'], $dados['modelo']),
-        };
+        return VeiculoFactory::catalogo(session('cadastrados', []));
     }
 
     public function index(): View
@@ -77,7 +49,7 @@ class VeiculoController extends Controller
             'horas' => 'tempo previsto',
         ]);
 
-        $veiculo = $this->instanciar($dados);
+        $veiculo = VeiculoFactory::criar($dados);
         $registro = [
             ...$veiculo->paraArray(),
             'horas' => (float) $dados['horas'],

@@ -347,4 +347,70 @@ Também removi temporariamente `@csrf` do formulário e confirmei que o HTML nã
 
 ## Atividade 10
 
-Pendente.
+Criei a classe de domínio `Estacionamento`, que é composta por uma coleção de objetos `Veiculo`, e o `EstacionamentoController`. Os registros e seus veículos serializados ficam na sessão. `Route::resource('estacionamentos', ...)` gera as sete rotas REST; implementei index, create, store, show, edit, update e destroy. As views permitem criar uma composição, ver seus veículos, editar e excluir; a exclusão usa `@csrf` e `@method('DELETE')`.
+
+### `php artisan route:list --name=estacionamentos`
+
+```text
+GET|HEAD estacionamentos .. estacionamentos.index › EstacionamentoController@index
+POST estacionamentos .. estacionamentos.store › EstacionamentoController@store
+GET|HEAD estacionamentos/create .. estacionamentos.create › EstacionamentoController@create
+GET|HEAD estacionamentos/{estacionamento} .. estacionamentos.show › EstacionamentoController@show
+PUT|PATCH estacionamentos/{estacionamento} .. estacionamentos.update › EstacionamentoController@update
+DELETE estacionamentos/{estacionamento} .. estacionamentos.destroy › EstacionamentoController@destroy
+GET|HEAD estacionamentos/{estacionamento}/edit .. estacionamentos.edit › EstacionamentoController@edit
+
+Showing [7] routes
+```
+
+### Mapeamento das rotas
+
+| Ação | Verbo | URI | Nome | Finalidade |
+|---|---|---|---|---|
+| index | GET | `/estacionamentos` | `estacionamentos.index` | Listar os estacionamentos da sessão |
+| create | GET | `/estacionamentos/create` | `estacionamentos.create` | Exibir o formulário de criação |
+| store | POST | `/estacionamentos` | `estacionamentos.store` | Validar e salvar uma composição na sessão |
+| show | GET | `/estacionamentos/{estacionamento}` | `estacionamentos.show` | Mostrar um estacionamento e seus veículos |
+| edit | GET | `/estacionamentos/{estacionamento}/edit` | `estacionamentos.edit` | Exibir o formulário de edição |
+| update | PUT/PATCH | `/estacionamentos/{estacionamento}` | `estacionamentos.update` | Validar e salvar as alterações |
+| destroy | DELETE | `/estacionamentos/{estacionamento}` | `estacionamentos.destroy` | Excluir a composição da sessão |
+
+### Testes HTTP reais em `http://127.0.0.1:8005`
+
+```text
+GET /estacionamentos (sessão sem registros)
+HTTP/1.1 200 OK
+Nenhum estacionamento cadastrado.
+
+POST /estacionamentos (nome=Estacionamento Central, veículos ABC1D23 e XYZ2E34)
+HTTP/1.1 302 Found
+Location: http://127.0.0.1:8005/estacionamentos/1
+
+GET /estacionamentos/1
+HTTP/1.1 200 OK
+Estacionamento Central
+ABC1D23 — carro — Sedan
+XYZ2E34 — moto — CG 160
+
+POST /estacionamentos/1 com @csrf e @method('DELETE')
+HTTP/1.1 302 Found
+Location: http://127.0.0.1:8005/estacionamentos
+
+GET /estacionamentos após a exclusão
+HTTP/1.1 200 OK
+Nenhum estacionamento cadastrado.
+
+curl.exe -i -X DELETE http://127.0.0.1:8005/estacionamentos/1 (sem sessão/token)
+HTTP/1.1 419 unknown status
+<title>Page Expired</title>
+```
+
+O formulário HTML envia POST e `@method('DELETE')` inclui `_method=DELETE`; o Laravel interpreta o POST como DELETE, e `@csrf` fornece o token vinculado à sessão. O comando cURL direto não enviou sessão nem token, então o middleware CSRF respondeu 419 antes de o controller procurar o ID; não foi um 404 nem uma falha da rota. O servidor da atividade está na porta 8005, pois a porta 8000 já estava ocupada. `Route::resource` reduz a configuração repetitiva e padroniza os nomes e URIs, mas é importante implementar as ações geradas para não deixar endpoints sem comportamento.
+
+![Lista inicialmente vazia](capturas/atividade-10-vazio.png)
+
+![Formulário para compor um estacionamento](capturas/atividade-10-formulario.png)
+
+![Detalhe do estacionamento composto por dois veículos](capturas/atividade-10-detalhe.png)
+
+![Lista vazia depois da exclusão](capturas/atividade-10-exclusao.png)

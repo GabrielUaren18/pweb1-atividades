@@ -87,6 +87,18 @@ button {
     color: #a23d00;
 }
 
+.card {
+    margin-block: 1.5rem;
+    padding: 1rem;
+    border: 1px solid #d5e0d8;
+    border-radius: 0.5rem;
+    background: white;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;

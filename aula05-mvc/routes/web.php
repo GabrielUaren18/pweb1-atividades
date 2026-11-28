@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EstacionamentoController;
 use App\Http\Controllers\PaginaController;
 use App\Http\Controllers\VeiculoController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,8 @@ Route::post('/produtos', [VeiculoController::class, 'store'])->name('produtos.st
 Route::get('/produtos/{id}', [VeiculoController::class, 'show'])
     ->whereNumber('id')
     ->name('produtos.show');
+
+Route::resource('estacionamentos', EstacionamentoController::class);
 
 Route::get('/saudacao/{nome?}', function (string $nome = 'visitante') {
     return "Olá, {$nome}!";
