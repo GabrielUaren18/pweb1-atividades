@@ -21,6 +21,7 @@ Este é o meu repositório de atividades da disciplina. Cada aula tem a sua pró
 | 02 | [`aula02-php-http`](aula02-php-http/) | PHP e HTTP na prática | ✅ |
 | 03 | [`aula03-oo`](aula03-oo/) | Orientação a Objetos em PHP | ✅ |
 | 06 | [`aula06-pratica`](aula06-pratica/) | Laravel na prática (rotas, views e controllers) | ✅ |
+| Sábado letivo | [`sabado-letivo`](sabado-letivo/) | Laravel com Estacionamento: PHP, POO e apoio de LLM | ✅ |
 
 ## Projeto integrador: Perfil do Estudante
 
