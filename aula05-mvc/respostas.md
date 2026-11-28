@@ -217,7 +217,37 @@ O nome e a lista vazia foram dados de teste temporários e removidos após as ca
 
 ## Atividade 07
 
-Pendente de captura real.
+Gerei `app/Http/Controllers/PaginaController.php` e movi as ações de início, sobre e contato para `inicio()`, `sobre()` e `contato()`. Os nomes e as URIs das rotas foram mantidos.
+
+### Comparação de `php artisan route:list --except-vendor`
+
+Antes, as ações das três páginas eram closures em `routes/web.php`:
+
+```text
+GET|HEAD / .. inicio › routes/web.php:5
+GET|HEAD contato .. contato › routes/web.php:13
+GET|HEAD quem-somos .. sobre › routes/web.php:9
+```
+
+Depois, a coluna de ação identifica os métodos do controller:
+
+```text
+GET|HEAD / .. inicio › PaginaController@inicio
+GET|HEAD contato .. contato › PaginaController@contato
+GET|HEAD quem-somos .. sobre › PaginaController@sobre
+```
+
+Teste temporário com o método digitado como `sobr`:
+
+```text
+GET /quem-somos
+HTTP/1.1 500 Internal Server Error
+Call to undefined method App\Http\Controllers\PaginaController::sobr()
+```
+
+Corrigi o nome do método depois do teste. O controller usa o namespace `App\Http\Controllers`, que o autoload PSR-4 do Composer associa à pasta `app/Http/Controllers`. A coluna de ação deixa visível o vínculo entre cada rota e o método chamado.
+
+![Página sobre renderizada pela PaginaController](capturas/atividade-07-pagina-sobre.png)
 
 ## Atividade 08
 

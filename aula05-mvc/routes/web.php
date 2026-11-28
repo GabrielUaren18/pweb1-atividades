@@ -1,18 +1,13 @@
 <?php
 
+use App\Http\Controllers\PaginaController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('inicio');
-})->name('inicio');
+Route::get('/', [PaginaController::class, 'inicio'])->name('inicio');
 
-Route::get('/quem-somos', function () {
-    return view('sobre');
-})->name('sobre');
+Route::get('/quem-somos', [PaginaController::class, 'sobre'])->name('sobre');
 
-Route::get('/contato', function () {
-    return view('contato');
-})->name('contato');
+Route::get('/contato', [PaginaController::class, 'contato'])->name('contato');
 
 Route::get('/inicio', function () {
     return redirect('/');
