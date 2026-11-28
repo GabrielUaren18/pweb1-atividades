@@ -1,0 +1,4 @@
+respostas.md
+routes/web.php
+resources/views/layouts/app.blade.php
+app/Http/Controllers/PaginaController.php
