@@ -1,0 +1,15 @@
+respostas.md
+prompts.md
+routes/web.php
+resources/views/layouts/app.blade.php
+resources/views/partials/menu.blade.php
+resources/views/inicio.blade.php
+resources/views/nao-encontrada.blade.php
+resources/views/veiculos/index.blade.php
+resources/views/veiculos/show.blade.php
+resources/views/veiculos/create.blade.php
+app/Domain/Estacionamento/Veiculo.php
+app/Domain/Estacionamento/Carro.php
+app/Domain/Estacionamento/Moto.php
+app/Domain/Estacionamento/Caminhonete.php
+app/Http/Controllers/VeiculoController.php
