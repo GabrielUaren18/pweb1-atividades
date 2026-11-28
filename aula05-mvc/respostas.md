@@ -161,7 +161,27 @@ O `GET /mensagem` exibiu o fallback personalizado (404), pois a rota fallback ta
 
 ## Atividade 05
 
-Pendente.
+Criei `layouts/app.blade.php` para a estrutura comum, `partials/menu.blade.php` para os links nomeados e `public/css/estilo.css` para os estilos. A página inicial, a página sobre e o contato agora estendem o layout.
+
+### Capturas do navegador
+
+![Página inicial com layout e menu](capturas/atividade-05-inicio.png)
+
+![Página de contato com layout e menu](capturas/atividade-05-contato.png)
+
+### Teste temporário sem `@endsection`
+
+```text
+GET /contato, removendo temporariamente @endsection
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+<h1>Contato</h1>
+<a href="http://127.0.0.1:8005/quem-somos">Sobre o estacionamento</a>
+```
+
+O teste não gerou erro: o conteúdo da seção continuou presente no HTML. Recoloquei `@endsection` depois do teste. O CSS foi servido com status 200 e `Content-Type: text/css; charset=UTF-8`.
+
+As diretivas Blade não aparecem no HTML servido: o Laravel compila e renderiza os templates no servidor. Os links usam `route()` para acompanhar os nomes das rotas. O CSS fica em `public/` porque os arquivos dessa pasta são servidos diretamente como recursos estáticos.
 
 ## Atividade 06
 

@@ -1,13 +1,9 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página não encontrada | Estacionamento Campus</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('titulo', 'Página não encontrada')
+
+@section('conteudo')
     <h1>404 - Página não encontrada</h1>
     <p>O endereço solicitado não existe neste estacionamento.</p>
-    <a href="/">Voltar ao início</a>
-</body>
-</html>
+    <a href="{{ route('inicio') }}">Voltar ao início</a>
+@endsection

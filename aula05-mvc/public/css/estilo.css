@@ -1,0 +1,65 @@
+:root {
+    color: #17251f;
+    background: #f3f7f4;
+    font-family: system-ui, sans-serif;
+}
+
+body {
+    margin: 0;
+}
+
+.container {
+    width: min(100% - 2rem, 960px);
+    margin-inline: auto;
+}
+
+.menu {
+    display: flex;
+    gap: 1.5rem;
+    padding-block: 1.25rem;
+    border-bottom: 1px solid #d5e0d8;
+}
+
+a {
+    color: #17613e;
+}
+
+.hero {
+    margin-block: 3rem;
+    padding: 3rem;
+    border-radius: 1rem;
+    background: #e0efe5;
+}
+
+.hero h1 {
+    max-width: 16ch;
+    margin-block: 0.5rem;
+    font-size: clamp(2.5rem, 7vw, 4.5rem);
+    line-height: 1.05;
+}
+
+.eyebrow {
+    color: #17613e;
+    font-weight: 700;
+}
+
+.button {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    background: #17613e;
+    color: white;
+    text-decoration: none;
+}
+
+main h1 {
+    margin-top: 2rem;
+}
+
+footer {
+    margin-top: 4rem;
+    padding-block: 1rem;
+    border-top: 1px solid #d5e0d8;
+    color: #53645a;
+}

@@ -3,11 +3,11 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('inicio');
+})->name('inicio');
 
 Route::get('/quem-somos', function () {
-    return 'O Estacionamento Campus organiza a entrada e a saída de veículos.';
+    return view('sobre');
 })->name('sobre');
 
 Route::get('/contato', function () {
