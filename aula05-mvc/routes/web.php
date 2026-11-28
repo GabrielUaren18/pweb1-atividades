@@ -18,6 +18,16 @@ Route::get('/inicio', function () {
     return redirect('/');
 });
 
+Route::get('/produtos', function () {
+    return view('produtos.index', [
+        'produtos' => [
+            ['nome' => 'Vaga coberta para carro', 'preco' => 42.00],
+            ['nome' => 'Vaga para motocicleta', 'preco' => 18.00],
+            ['nome' => 'Vaga com carregamento elétrico', 'preco' => 36.50],
+        ],
+    ]);
+})->name('produtos.index');
+
 Route::get('/produtos/{id}', function (int $id) {
     return "Produto {$id} solicitado no Estacionamento Campus.";
 })->whereNumber('id');

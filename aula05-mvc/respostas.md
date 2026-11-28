@@ -185,11 +185,39 @@ As diretivas Blade não aparecem no HTML servido: o Laravel compila e renderiza 
 
 ## Atividade 06
 
-Pendente.
+Adicionei a rota nomeada `produtos.index` e uma view Blade com tabela de vagas e serviços. `@forelse` percorre os dados, `@empty` apresenta uma mensagem quando a lista está vazia, e `@if` destaca valores acima de R$ 30,00.
+
+### Saídas HTTP observadas
+
+```text
+GET /produtos (lista preenchida)
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=utf-8
+Vaga coberta para carro — R$ 42,00 (destaque)
+Vaga para motocicleta — R$ 18,00
+Vaga com carregamento elétrico — R$ 36,50 (destaque)
+
+GET /produtos (lista temporariamente vazia)
+HTTP/1.1 200 OK
+<td colspan="2">Nenhuma vaga disponível.</td>
+
+Nome de teste: <script>alert("invadido")</script>
+Com {{ }}:
+<td>&lt;script&gt;alert(&quot;invadido&quot;)&lt;/script&gt;</td>
+
+Com {!! !!} temporariamente:
+<td><script>alert("invadido")</script></td>
+```
+
+O nome e a lista vazia foram dados de teste temporários e removidos após as capturas; a view final voltou a usar `{{ }}`. A saída raw foi inspecionada por `curl.exe`, sem executá-la em um navegador. `{{ }}` escapa HTML, como `htmlspecialchars`, impedindo que a string seja interpretada como marcação/script. `{!! !!}` não escapa o conteúdo e deve ser reservado a HTML confiável. `@forelse` evita uma verificação e um loop separados ao oferecer o ramo `@empty`.
+
+![Tabela de vagas e valores](capturas/atividade-06-vagas.png)
+
+![String de teste exibida como texto escapado](capturas/atividade-06-xss-escapado.png)
 
 ## Atividade 07
 
-Pendente.
+Pendente de captura real.
 
 ## Atividade 08
 
